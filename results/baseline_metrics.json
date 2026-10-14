@@ -1,7 +1,0 @@
-{
-  "model": "tfidf+logreg",
-  "accuracy": 0.8773,
-  "micro_f1": 0.8773,
-  "macro_f1": 0.8253108024881499,
-  "train_seconds": 679.3714663982391
-}
