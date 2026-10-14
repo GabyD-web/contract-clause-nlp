@@ -1,0 +1,15 @@
+torch
+transformers
+datasets
+accelerate
+sentence-transformers
+faiss-cpu
+rank-bm25
+scikit-learn
+pandas
+numpy
+matplotlib
+seaborn
+pyyaml
+tqdm
+pytest
