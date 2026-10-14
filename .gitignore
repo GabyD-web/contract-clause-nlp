@@ -218,3 +218,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project-specific
+data/raw/
+models/
+checkpoints/
+wandb/
+*.bin
+*.safetensors
+*.pt
+*.faiss
