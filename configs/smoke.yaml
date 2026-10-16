@@ -1,0 +1,12 @@
+model_name: nlpaueb/legal-bert-base-uncased
+max_length: 256
+batch_size: 32
+lr: 3.0e-5
+weight_decay: 0.01
+warmup_ratio: 0.06
+epochs: 1
+patience: 1
+seed: 42
+max_train: 2000
+output_dir: /content/drive/MyDrive/clause-nlp/smoke
+results_dir: results/smoke
