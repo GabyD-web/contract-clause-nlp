@@ -19,13 +19,14 @@ Key findings from the EDA (`notebooks/01_eda.ipynb`):
 
 ## Results
 
-| Model | Test accuracy | Test macro-F1 | Macro-F1, dedup test |
-|---|---|---|---|
-| TF-IDF + logistic regression (C=30, tuned on validation) | 0.878 | 0.827 | 0.823 |
-| BERT-base | *in progress* | | |
-| Legal-BERT (3 seeds) | *in progress* | | |
+| Model | Test accuracy | Test macro-F1 (95% CI) | Macro-F1, dedup test | ECE |
+|---|---|---|---|---|
+| TF-IDF + logistic regression (C=30, tuned on validation) | 0.878 | 0.827 | 0.823 | *to compute* |
+| BERT-base | *in progress* | | | |
+| Legal-BERT (10 epochs, seed 42) | 0.884 | 0.830 [0.814 – 0.840] | 0.826 | 0.084 |
+| Legal-BERT (3 seeds, mean ± std) | *in progress* | | | |
 
-Retrieval and audit results: *in progress*.
+On LEDGAR, fine-tuned Legal-BERT improves accuracy by 0.7 points over a well-tuned TF-IDF model, but the macro-F1 gain (+0.3) lies within the confidence interval. Full history: [`results/EXPERIMENTS.md`](results/EXPERIMENTS.md).
 
 ## Repository structure
 
