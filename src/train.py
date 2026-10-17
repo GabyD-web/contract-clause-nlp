@@ -28,7 +28,7 @@ def main(cfg):
 
     # --- model, optimiser, schedule ---
     model = AutoModelForSequenceClassification.from_pretrained(
-        cfg["model_name"], num_labels=len(names),
+        cfg["model_name"],
         id2label=dict(enumerate(names)), label2id={n: i for i, n in enumerate(names)}).to(device)
     opt = torch.optim.AdamW(model.parameters(), lr=cfg["lr"], weight_decay=cfg["weight_decay"])
     total_steps = len(train_dl) * cfg["epochs"]
