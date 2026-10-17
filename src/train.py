@@ -59,6 +59,8 @@ def main(cfg):
                "val_macro_f1": f1_score(labels, preds, average="macro"),
                "epoch_minutes": (time.time() - t0) / 60}
         history.append(row); print(row)
+        save_json({"config": cfg, "history": history},
+                os.path.join(cfg["output_dir"], "train_log.json"))
 
         if row["val_macro_f1"] > best:
             best, bad_epochs = row["val_macro_f1"], 0
