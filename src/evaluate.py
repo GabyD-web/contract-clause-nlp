@@ -29,13 +29,19 @@ def main(model_dir, out_dir, max_length):
     os.makedirs(out_dir, exist_ok=True)
     ds, names = load_ledgar()
     tok = AutoTokenizer.from_pretrained(model_dir)
-    test = ds["test"].map(lambda b: tok(b["text"], truncation=True, max_length=max_length),
-                          batched=True, remove_columns=["text"]).rename_column("label", "labels")
-    test.set_format("torch")
-    dl = DataLoader(test, batch_size=64, collate_fn=DataCollatorWithPadding(tok))
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model = AutoModelForSequenceClassification.from_pretrained(model_dir).to(device)
-    logits, y = predict_loader(model, dl, device)
+
+    def run(split):
+        enc = ds[split].map(lambda b: tok(b["text"], truncation=True, max_length=max_length),
+                            batched=True, remove_columns=["text"]).rename_column("label", "labels")
+        enc.set_format("torch")
+        dl = DataLoader(enc, batch_size=64, collate_fn=DataCollatorWithPadding(tok))
+        return predict_loader(model, dl, device)
+
+    val_logits, _ = run("validation")
+    np.save(f"{out_dir}/val_logits.npy", val_logits)
+    logits, y = run("test")
     np.save(f"{out_dir}/test_logits.npy", logits)
 
     probs = softmax(logits); p = probs.argmax(1)
