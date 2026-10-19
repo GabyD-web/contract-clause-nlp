@@ -36,9 +36,15 @@ notebooks/   EDA, Colab runner, audit analysis
 src/         data loading, training, evaluation, retrieval, audit
 scripts/     run_all.sh reproduces every result
 results/     metrics (JSON/CSV) and figures
-docs/        model card
+docs/        model card, retrieval queries, out-of-scope samples
 tests/       sanity tests
 ```
+
+Inputs for the retrieval evaluation and the audit live in `docs/`:
+- `docs/queries.csv` — 30 lawyer queries (10 frequent, 10 mid-frequency, 10 rare clause types) with the expected label and, for most, a string the top result must contain.
+- `docs/out_of_scope.txt` — 50 out-of-scope samples (news, email chatter, legal-but-not-clause, French) for the abstention analysis.
+
+The 50 most confident errors are catalogued in `results/errors_top50.csv`, with a manual category (`label_noise`, `overlapping_labels`, `multi_topic`, `model_error`) and a comment.
 
 ## Quickstart
 
