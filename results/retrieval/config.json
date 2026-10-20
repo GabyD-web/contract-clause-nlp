@@ -1,0 +1,10 @@
+{
+  "bank_split": "train",
+  "bank_size": 60000,
+  "k": 5,
+  "hybrid": {
+    "method": "minmax",
+    "alpha": 0.3
+  },
+  "n_queries": 30
+}

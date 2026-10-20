@@ -1,0 +1,28 @@
+{
+  "non-clause English text": {
+    "n": 41,
+    "mean_confidence": 0.4581804871559143,
+    "median_confidence": 0.3441828489303589,
+    "pct_conf_gt_0.9": 0.0975609756097561,
+    "predicted_labels": {
+      "Effective Dates": 5,
+      "Adjustments": 4,
+      "General": 3,
+      "Interests": 2,
+      "Closings": 2
+    }
+  },
+  "French text": {
+    "n": 9,
+    "mean_confidence": 0.3293771743774414,
+    "median_confidence": 0.17730925977230072,
+    "pct_conf_gt_0.9": 0.1111111111111111,
+    "predicted_labels": {
+      "Binding Effects": 2,
+      "Jurisdictions": 1,
+      "Confidentiality": 1,
+      "Notices": 1,
+      "Miscellaneous": 1
+    }
+  }
+}

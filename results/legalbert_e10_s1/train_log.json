@@ -1,0 +1,87 @@
+{
+  "config": {
+    "model_name": "nlpaueb/legal-bert-base-uncased",
+    "max_length": 256,
+    "batch_size": 32,
+    "lr": 3e-05,
+    "weight_decay": 0.01,
+    "warmup_ratio": 0.06,
+    "epochs": 10,
+    "patience": 2,
+    "seed": 1,
+    "output_dir": "runs/legalbert_e10_s1",
+    "results_dir": "runs/results/legalbert_e10_s1"
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.8589205032348632,
+      "val_micro_f1": 0.8221,
+      "val_macro_f1": 0.6946221637202479,
+      "epoch_minutes": 3.928545812765757
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.5713508218765259,
+      "val_micro_f1": 0.8493,
+      "val_macro_f1": 0.7596215574773408,
+      "epoch_minutes": 3.912696639696757
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.41368794673283893,
+      "val_micro_f1": 0.8638,
+      "val_macro_f1": 0.7773490978638137,
+      "epoch_minutes": 3.911367988586426
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.3126025532563527,
+      "val_micro_f1": 0.87,
+      "val_macro_f1": 0.7953894580217467,
+      "epoch_minutes": 3.908457851409912
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.23427404385407766,
+      "val_micro_f1": 0.8745,
+      "val_macro_f1": 0.8006135556681521,
+      "epoch_minutes": 3.9538078467051188
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.17371306023597718,
+      "val_micro_f1": 0.8778,
+      "val_macro_f1": 0.8079329070546111,
+      "epoch_minutes": 3.9149158159891764
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.12852620476086934,
+      "val_micro_f1": 0.8833,
+      "val_macro_f1": 0.8184246400814733,
+      "epoch_minutes": 3.907977890968323
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.09308177067438761,
+      "val_micro_f1": 0.8854,
+      "val_macro_f1": 0.8211201399276413,
+      "epoch_minutes": 3.906513599554698
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.06842864983876547,
+      "val_micro_f1": 0.884,
+      "val_macro_f1": 0.8240378838473117,
+      "epoch_minutes": 3.908584749698639
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.051296762736638385,
+      "val_micro_f1": 0.8839,
+      "val_macro_f1": 0.8190131006563067,
+      "epoch_minutes": 3.912486362457275
+    }
+  ]
+}

@@ -6,10 +6,13 @@ from transformers import (AutoTokenizer, AutoModelForSequenceClassification,
 from sklearn.metrics import f1_score
 from src.data import load_ledgar
 from src.predict import predict_loader
-from src.utils import set_seed, load_config, save_json
+from src.utils import set_seed, load_config, save_json, resolve_paths
 
 def main(cfg):
     set_seed(cfg["seed"])
+    cfg = resolve_paths(cfg)   # no-op unless CLAUSE_NLP_ROOT is set
+    os.makedirs(cfg["output_dir"], exist_ok=True)
+    os.makedirs(cfg["results_dir"], exist_ok=True)
     device = "cuda" if torch.cuda.is_available() else "cpu"
     ds, names = load_ledgar()
     if cfg.get("max_train"):   # smoke test: train on a small subset
