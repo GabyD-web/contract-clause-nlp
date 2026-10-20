@@ -1,0 +1,70 @@
+{
+  "runs": [
+    {
+      "set": "Colab/Kaggle",
+      "seed": 42,
+      "accuracy": 0.8843,
+      "macro_f1": 0.8298161875626814,
+      "macro_f1_dedup": 0.8261776331331397,
+      "ece": 0.08444158175289636
+    },
+    {
+      "set": "Colab/Kaggle",
+      "seed": 1,
+      "accuracy": 0.8873,
+      "macro_f1": 0.8318282919982005,
+      "macro_f1_dedup": 0.8283678576967357,
+      "ece": 0.08266106578111651
+    },
+    {
+      "set": "Colab/Kaggle",
+      "seed": 2,
+      "accuracy": 0.8827,
+      "macro_f1": 0.8240294893089407,
+      "macro_f1_dedup": 0.8204200305103349,
+      "ece": 0.08460093550086022
+    },
+    {
+      "set": "local GPU",
+      "seed": 42,
+      "accuracy": 0.8862,
+      "macro_f1": 0.8272793729352967,
+      "macro_f1_dedup": 0.8237978654007887,
+      "ece": 0.08128181342557073
+    },
+    {
+      "set": "local GPU",
+      "seed": 1,
+      "accuracy": 0.8841,
+      "macro_f1": 0.8256084701804646,
+      "macro_f1_dedup": 0.8221574963928443,
+      "ece": 0.08283029092773798
+    },
+    {
+      "set": "local GPU",
+      "seed": 2,
+      "accuracy": 0.8823,
+      "macro_f1": 0.8233342636239892,
+      "macro_f1_dedup": 0.8198269053250605,
+      "ece": 0.08463712706789372
+    }
+  ],
+  "overall": {
+    "accuracy": {
+      "mean": 0.8845,
+      "std": 0.0019
+    },
+    "macro_f1": {
+      "mean": 0.827,
+      "std": 0.0033
+    },
+    "macro_f1_dedup": {
+      "mean": 0.8235,
+      "std": 0.0033
+    },
+    "ece": {
+      "mean": 0.0834,
+      "std": 0.0014
+    }
+  }
+}
