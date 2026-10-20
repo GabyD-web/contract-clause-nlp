@@ -1,0 +1,78 @@
+{
+  "temperature": {
+    "seed_1": 1.4462,
+    "seed_2": 1.43
+  },
+  "ece_test": {
+    "seed_1_raw": 0.0827,
+    "seed_2_raw": 0.0846,
+    "seed_1_calibrated": 0.0238,
+    "seed_2_calibrated": 0.028,
+    "tfidf": 0.0198
+  },
+  "abstention": [
+    {
+      "target": 0.95,
+      "model": "Legal-BERT s1 (calibrated)",
+      "threshold (val)": 0.89,
+      "test coverage": 0.8116,
+      "test accuracy": 0.9509610645638246
+    },
+    {
+      "target": 0.95,
+      "model": "Legal-BERT s2 (calibrated)",
+      "threshold (val)": 0.89,
+      "test coverage": 0.8119,
+      "test accuracy": 0.9475304840497598
+    },
+    {
+      "target": 0.95,
+      "model": "TF-IDF + LogReg",
+      "threshold (val)": 0.74,
+      "test coverage": 0.8296,
+      "test accuracy": 0.9456364513018322
+    },
+    {
+      "target": 0.97,
+      "model": "Legal-BERT s1 (calibrated)",
+      "threshold (val)": 0.95,
+      "test coverage": 0.5799,
+      "test accuracy": 0.9717192619417141
+    },
+    {
+      "target": 0.97,
+      "model": "Legal-BERT s2 (calibrated)",
+      "threshold (val)": 0.94,
+      "test coverage": 0.6527,
+      "test accuracy": 0.967979163474797
+    },
+    {
+      "target": 0.97,
+      "model": "TF-IDF + LogReg",
+      "threshold (val)": 0.88,
+      "test coverage": 0.7258,
+      "test accuracy": 0.9654174703775145
+    },
+    {
+      "target": 0.99,
+      "model": "Legal-BERT s1 (calibrated)",
+      "threshold (val)": 0.974,
+      "test coverage": 0.2654,
+      "test accuracy": 0.9853051996985682
+    },
+    {
+      "target": 0.99,
+      "model": "Legal-BERT s2 (calibrated)",
+      "threshold (val)": 0.972,
+      "test coverage": 0.3142,
+      "test accuracy": 0.9856779121578613
+    },
+    {
+      "target": 0.99,
+      "model": "TF-IDF + LogReg",
+      "threshold (val)": 0.986,
+      "test coverage": 0.4377,
+      "test accuracy": 0.9830934429974869
+    }
+  ]
+}

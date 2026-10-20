@@ -52,7 +52,8 @@ the full training history are in [`results/EXPERIMENTS.md`](results/EXPERIMENTS.
   `results/errors_top50.csv`), **25 are label noise, 12 overlapping labels, 11 multi-topic clauses
   and only 2 genuine model errors.**
 - **Legal-BERT is overconfident.** ECE 0.083 against 0.020 for logistic regression, so its raw
-  confidence must be calibrated before it decides which clauses go to a lawyer.
+  confidence must be calibrated before it decides which clauses go to a lawyer
+  (done below: ECE 0.083 → 0.024).
 - **No extra memorisation.** Removing the 282 duplicated test clauses costs both models the same
   0.3 – 0.4 pt.
 
@@ -63,9 +64,43 @@ as large as any difference between the models, which is why we report the mean o
 rather than a single run. The baseline reproduces within 0.1 pt across machines.
 
 Which runs each analysis uses:
-- `notebooks/02_evaluation.ipynb` (significance tests, buckets, confusions, calibration) uses the
-  Colab seed 42 run, whose logits are saved in `results/legalbert_e10_s42/`.
+- `notebooks/02_evaluation.ipynb`: significance tests, buckets and confusions use the Colab seed 42
+  run (`results/legalbert_e10_s42/`); calibration, abstention and the ensemble use the Kaggle
+  seeds 1 and 2, which also saved validation logits (`results/legalbert_e10_s{1,2}/`).
 - The audit (`results/audit/seed_*/`) uses the three local-GPU models.
+
+### Calibration, abstention and ensemble
+
+Computed in `notebooks/02_evaluation.ipynb` on the Kaggle seeds 1 and 2, the two runs whose
+validation logits are saved. Temperatures and thresholds are fitted on **validation** only.
+
+| Model (test set) | Accuracy | Macro-F1 | ECE | Auto-tagged at ~97% accuracy* |
+|---|---|---|---|---|
+| TF-IDF + logistic regression | 0.878 | 0.827 | 0.020 | 72.6% (acc. 96.5%) |
+| Legal-BERT, calibrated (s1 / s2) | 0.887 / 0.883 | 0.832 / 0.824 | 0.024 / 0.028 | 58.0% / 65.3% (acc. 97.2% / 96.8%) |
+| **Ensemble: calibrated Legal-BERT + TF-IDF, 50/50 (s1 / s2)** | **0.895 / 0.891** | **0.844 / 0.836** | **0.017 / 0.013** | **76.6% / 76.5%** (acc. 96.7%) |
+
+\*Lowest confidence threshold whose **validation** accuracy reaches 97%, applied to the test set.
+
+- **Calibration works.** Temperature scaling (T = 1.45 and 1.43) cuts Legal-BERT's test ECE from
+  0.083–0.085 to 0.024–0.028 and its test NLL from 0.62–0.64 to 0.52–0.53, close to logistic
+  regression (0.020). After scaling, a displayed confidence of 0.90 really means about 90% correct.
+- **Alone, Legal-BERT is no better at knowing when it is right.** At equal coverage, calibrated
+  Legal-BERT and TF-IDF are as accurate on their most confident clauses (top 50%: 97.6% vs 98.0%;
+  top 90%: 93.2% vs 92.4%). For deciding what goes to a lawyer, it brings no advantage on its own.
+- **The ensemble beats both.** Averaging the two models' probabilities (equal weights, nothing
+  fitted) gives the best accuracy, macro-F1 and calibration of the project. Against Legal-BERT
+  alone: macro-F1 +1.2 pt, 95% CI [+0.6, +2.0] (seed 1) and [+0.7, +1.7] (seed 2); McNemar
+  p < 10⁻⁷. It tags about 77% of test clauses automatically at about 97% accuracy; the other 23%
+  go to a lawyer. The two models are complementary: Legal-BERT is stronger on frequent clause types,
+  TF-IDF on rare keyword-defined ones. TF-IDF adds almost no compute.
+- **How the ensemble was chosen.** The idea came after the single-model test results. It has no
+  fitted parameters, and its gain is confirmed on validation (macro-F1 0.8325 / 0.8365 vs
+  0.8248 / 0.8230 for Legal-BERT alone), which is the check that would have selected it beforehand.
+  The bias audit below was run on Legal-BERT alone, not on the ensemble.
+
+Files: `results/abstention.json`, `results/abstention_table.csv`, `results/ensemble.json`,
+`results/ensemble_summary.csv`, `results/figures/abstention_curve.png`.
 
 ## Retrieval
 
@@ -110,7 +145,8 @@ Mean over the three local-GPU models (`results/audit/seed_{42,1,2}/`).
 - **Abstention (raw confidence, mean over 3 seeds, `results/audit/seed_*/abstention.csv`):** at a
   0.85 threshold the model tags 93.3% of clauses automatically at 91.7% accuracy; at 0.95, 88.5% at
   93.2%. Because the model is overconfident, even high raw thresholds do not reach 97% accuracy.
-  The temperature-calibrated curve is in `notebooks/02_evaluation.ipynb`.
+    After temperature scaling, and combined with TF-IDF, the system reaches about 97% accuracy on
+  77% of clauses: see *Calibration, abstention and ensemble* above.
 
 The model card ([`docs/model_card.md`](docs/model_card.md)) lists intended uses, uses the model
 must not be put to, and data-protection requirements.

@@ -1,0 +1,97 @@
+{
+  "summary": [
+    {
+      "model": "TF-IDF + LogReg",
+      "accuracy": 0.8775,
+      "macro_f1": 0.8266816673930719,
+      "ece": 0.019762882209226854,
+      "val_accuracy": 0.8793,
+      "val_macro_f1": 0.8185162593352905,
+      "threshold_97_val": 0.88,
+      "coverage_97": 0.7258,
+      "test_acc_at_threshold": 0.9654174703775145,
+      "acc_top_50pct": 0.9804,
+      "acc_top_70pct": 0.968,
+      "acc_top_80pct": 0.95275,
+      "acc_top_90pct": 0.9243333333333333
+    },
+    {
+      "model": "Legal-BERT s1 (calibrated)",
+      "accuracy": 0.8873,
+      "macro_f1": 0.8318282919982005,
+      "ece": 0.023844135057613913,
+      "val_accuracy": 0.8866,
+      "val_macro_f1": 0.8247813639295865,
+      "threshold_97_val": 0.95,
+      "coverage_97": 0.5799,
+      "test_acc_at_threshold": 0.9717192619417141,
+      "acc_top_50pct": 0.9764,
+      "acc_top_70pct": 0.9625714285714285,
+      "acc_top_80pct": 0.952875,
+      "acc_top_90pct": 0.9317777777777778
+    },
+    {
+      "model": "Ensemble s1 (50/50 avg)",
+      "accuracy": 0.895,
+      "macro_f1": 0.8437966555039,
+      "ece": 0.016695040986778424,
+      "val_accuracy": 0.8945,
+      "val_macro_f1": 0.8324965943433139,
+      "threshold_97_val": 0.85,
+      "coverage_97": 0.7655,
+      "test_acc_at_threshold": 0.9670803396472893,
+      "acc_top_50pct": 0.9858,
+      "acc_top_70pct": 0.9755714285714285,
+      "acc_top_80pct": 0.961125,
+      "acc_top_90pct": 0.9396666666666667
+    },
+    {
+      "model": "Legal-BERT s2 (calibrated)",
+      "accuracy": 0.8827,
+      "macro_f1": 0.8240294893089407,
+      "ece": 0.02800311299029882,
+      "val_accuracy": 0.8863,
+      "val_macro_f1": 0.8229526479962352,
+      "threshold_97_val": 0.94,
+      "coverage_97": 0.6527,
+      "test_acc_at_threshold": 0.967979163474797,
+      "acc_top_50pct": 0.9774,
+      "acc_top_70pct": 0.962,
+      "acc_top_80pct": 0.94925,
+      "acc_top_90pct": 0.9278888888888889
+    },
+    {
+      "model": "Ensemble s2 (50/50 avg)",
+      "accuracy": 0.8911,
+      "macro_f1": 0.8360451350688486,
+      "ece": 0.012843582202042614,
+      "val_accuracy": 0.8933,
+      "val_macro_f1": 0.8364962801701517,
+      "threshold_97_val": 0.85,
+      "coverage_97": 0.7653,
+      "test_acc_at_threshold": 0.9673330719979093,
+      "acc_top_50pct": 0.9856,
+      "acc_top_70pct": 0.9747142857142858,
+      "acc_top_80pct": 0.962,
+      "acc_top_90pct": 0.9378888888888889
+    }
+  ],
+  "ensemble_vs_legalbert": {
+    "seed_1": {
+      "macro_f1_diff": 0.01238358897468578,
+      "ci95": [
+        0.006120447855787703,
+        0.020238177025482775
+      ],
+      "mcnemar_p": 7.880546230827447e-08
+    },
+    "seed_2": {
+      "macro_f1_diff": 0.012123319748018191,
+      "ci95": [
+        0.007058137023660369,
+        0.01727075933571871
+      ],
+      "mcnemar_p": 2.7207210583717808e-08
+    }
+  }
+}

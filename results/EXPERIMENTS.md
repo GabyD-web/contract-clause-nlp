@@ -16,6 +16,8 @@ All hyperparameters chosen on validation. Test used once per final configuration
 | 19–20 Oct | Legal-BERT | 10 ep, seed 1 | local RTX 4070 Ti SUPER | 0.8240 (ep 9) | 0.8256 [0.811–0.835] (dedup 0.8222) | 0.8841 | ECE 0.083. Used by the audit |
 | 19–20 Oct | Legal-BERT | 10 ep, seed 2 | local RTX 4070 Ti SUPER | 0.8184 (ep 9) | 0.8233 [0.809–0.832] (dedup 0.8198) | 0.8823 | ECE 0.085. Used by the audit |
 | 20 Oct | TF-IDF + LogReg | rerun, C=30 | local workstation | 0.8188 | 0.8266 (dedup 0.8229) | 0.8767 | Reproduces the reference baseline within 0.1 pt |
+| 20 Oct | Legal-BERT + temperature scaling | T fitted on val: 1.45 (s1), 1.43 (s2) | laptop CPU | 0.8248 / 0.8230 | 0.8318 / 0.8240 (unchanged) | 0.8873 / 0.8827 | ECE 0.083 → 0.024 (s1), 0.085 → 0.028 (s2) |
+| 20 Oct | **Ensemble: cal. Legal-BERT + TF-IDF, 50/50** | seeds 1 / 2, no fitted weights | laptop CPU | 0.8325 / 0.8365 | **0.844 / 0.836** | **0.895 / 0.891** | ECE 0.017 / 0.013. +1.2 pt macro-F1 over Legal-BERT (95% CI excludes 0; McNemar p < 1e-7). Post-hoc idea, confirmed on validation. ~77% auto-tagged at ~97% accuracy |
 
 Local-GPU runs: `results/local_gpu/legalbert_e10_s*/`. Colab/Kaggle runs: `results/legalbert_e10_s*/`.
 
@@ -41,3 +43,9 @@ Local-GPU runs: `results/local_gpu/legalbert_e10_s*/`. Colab/Kaggle runs: `resul
   EDA's truncation concern is not borne out.
 - Retrieval (30 lawyer queries): BM25 hit@5 0.967 / MRR 0.856 beats embeddings (0.900 / 0.786) and
   hybrid (0.933 / 0.832).
+- **Calibration and ensemble (seeds 1 and 2, `notebooks/02_evaluation.ipynb`).** Temperature scaling
+  (T ≈ 1.44, fitted on validation) brings Legal-BERT's ECE from 0.083 to 0.024–0.028. At equal
+  coverage, calibrated Legal-BERT ranks its confidence no better than TF-IDF. Averaging the two
+  models' probabilities is significantly better than Legal-BERT alone (macro-F1 +1.2 pt) and tags
+  about 77% of clauses at about 97% accuracy (thresholds chosen on validation). Files:
+  `results/abstention.json`, `results/ensemble.json`, `results/ensemble_summary.csv`.
