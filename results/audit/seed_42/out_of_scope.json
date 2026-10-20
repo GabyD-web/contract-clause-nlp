@@ -1,0 +1,28 @@
+{
+  "non-clause English text": {
+    "n": 41,
+    "mean_confidence": 0.48485589027404785,
+    "median_confidence": 0.3995595872402191,
+    "pct_conf_gt_0.9": 0.12195121951219512,
+    "predicted_labels": {
+      "General": 5,
+      "Adjustments": 4,
+      "Benefits": 3,
+      "Closings": 3,
+      "Employment": 3
+    }
+  },
+  "French text": {
+    "n": 9,
+    "mean_confidence": 0.5611870884895325,
+    "median_confidence": 0.5838305950164795,
+    "pct_conf_gt_0.9": 0.1111111111111111,
+    "predicted_labels": {
+      "Effective Dates": 1,
+      "Jurisdictions": 1,
+      "Confidentiality": 1,
+      "Terms": 1,
+      "Notices": 1
+    }
+  }
+}

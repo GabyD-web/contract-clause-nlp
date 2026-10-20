@@ -19,14 +19,17 @@ Key findings from the EDA (`notebooks/01_eda.ipynb`):
 
 ## Results
 
-| Model | Test accuracy | Test macro-F1 (95% CI) | Macro-F1, dedup test | ECE |
-|---|---|---|---|---|
-| TF-IDF + logistic regression (C=30, tuned on validation) | 0.878 | 0.827 | 0.823 | *to compute* |
-| BERT-base | *in progress* | | | |
-| Legal-BERT (10 epochs, seed 42) | 0.884 | 0.830 [0.814 – 0.840] | 0.826 | 0.084 |
-| Legal-BERT (3 seeds, mean ± std) | *in progress* | | | |
+| Model | Test accuracy | Test macro-F1 (95% CI) | Test micro-F1 | Macro-F1, dedup test | ECE |
+|---|---|---|---|---|---|
+| TF-IDF + logistic regression (C=30, tuned on validation) | 0.877 | 0.827 | 1.000 | 0.823 | 0.021 |
+| Legal-BERT, seed 42 (10 epochs) | 0.886 | 0.827 [0.813 – 0.836] | 1.000 | 0.824 | 0.081 |
+| Legal-BERT (3 seeds, mean ± std) | 0.884 ± 0.002 | 0.825 ± 0.002 | — | 0.822 ± 0.002 | 0.083 ± 0.002 |
 
-On LEDGAR, fine-tuned Legal-BERT improves accuracy by 0.7 points over a well-tuned TF-IDF model, but the macro-F1 gain (+0.3) lies within the confidence interval. Full history: [`results/EXPERIMENTS.md`](results/EXPERIMENTS.md).
+On LEDGAR, fine-tuning Legal-BERT does **not** improve macro-F1 over a well-tuned TF-IDF model:
+the three-seed mean (0.8254) is marginally below the baseline (0.8267), a difference of −0.001 that
+sits inside both the seed spread (±0.002) and the bootstrap CI. Accuracy is consistently higher
+(+0.7 points, McNemar p = 0.012), and the transformer is markedly worse calibrated
+(ECE 0.083 vs 0.021). Full history: [`results/EXPERIMENTS.md`](results/EXPERIMENTS.md).
 
 ## Repository structure
 
@@ -56,6 +59,27 @@ python -m src.baseline            # CPU, ~30 min
 ```
 
 Transformer training runs on Google Colab (T4 GPU): see `notebooks/00_colab_runner.ipynb`.
+
+## Retrieval and audit
+
+Retrieval on 30 lawyer queries (`docs/queries.csv`) against the 60,000-clause training bank:
+
+| Method | Hit@5 | MRR | must_contain in top 5 |
+|---|---|---|---|
+| BM25 | **0.967** | **0.856** | 1.000 |
+| Embeddings (all-MiniLM-L6-v2) | 0.900 | 0.786 | 0.963 |
+| Hybrid (BM25 + embeddings) | 0.933 | 0.832 | 1.000 |
+
+BM25 alone wins; fusion never beat it at any weight tested. Dense retrieval returns clauses that
+share a topic but not a clause type. All the difficulty is in rare clause types (hit@5 0.917 vs 1.000).
+
+Audit highlights (`results/audit/`, mean over 3 seeds):
+
+- Frequent clause types: 0.933 accuracy. Rare (bottom 40 classes): 0.780.
+- Clauses truncated at 256 tokens score **+0.019 higher** than short ones — truncation costs nothing measurable.
+- Non-clause and French text are rejected: mean confidence 0.38 and 0.34 against 0.97 on real clauses.
+- Rare classes are overconfident (0.948 confidence at 0.780 accuracy) — the worst calibration in any slice.
+- At a 0.85 threshold, 82% of clauses are tagged automatically at 94.0% accuracy.
 
 ## Reproducibility
 

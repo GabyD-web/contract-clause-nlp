@@ -1,0 +1,8 @@
+{
+  "model_dir": "runs/legalbert_e10_s1",
+  "max_length": 256,
+  "overall_accuracy": 0.884,
+  "overall_macro_f1": 0.8254541719708159,
+  "n_truncated": 1083,
+  "pct_truncated": 0.1083
+}

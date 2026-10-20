@@ -1,0 +1,28 @@
+{
+  "non-clause English text": {
+    "n": 41,
+    "mean_confidence": 0.46349456906318665,
+    "median_confidence": 0.3853512108325958,
+    "pct_conf_gt_0.9": 0.12195121951219512,
+    "predicted_labels": {
+      "General": 8,
+      "Effective Dates": 5,
+      "Terminations": 4,
+      "Records": 3,
+      "Notices": 3
+    }
+  },
+  "French text": {
+    "n": 9,
+    "mean_confidence": 0.5405824184417725,
+    "median_confidence": 0.5684059858322144,
+    "pct_conf_gt_0.9": 0.1111111111111111,
+    "predicted_labels": {
+      "Enforceability": 2,
+      "Jurisdictions": 1,
+      "Confidentiality": 1,
+      "Effectiveness": 1,
+      "Notices": 1
+    }
+  }
+}

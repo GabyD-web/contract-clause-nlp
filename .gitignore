@@ -228,3 +228,7 @@ wandb/
 *.safetensors
 *.pt
 *.faiss
+# local training artifacts
+runs/
+models/
+results/baseline/*.npy
