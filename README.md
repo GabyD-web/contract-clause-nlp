@@ -157,13 +157,28 @@ must not be put to, and data-protection requirements.
 configs/     training configurations (one YAML per model)
 notebooks/   EDA, Colab runner, evaluation analysis
 src/         data loading, training, evaluation, retrieval, audit
-scripts/     run_all.sh reproduces every result
+scripts/     quickstart.sh (one-command setup); run_all.sh reproduces every result
 results/     metrics (JSON/CSV), figures, experiment log
 docs/        model card, retrieval queries, out-of-scope samples
 tests/       sanity tests
 ```
 
 ## Quickstart
+
+One command, on Linux, macOS, WSL and Windows (Git Bash):
+
+```bash
+./scripts/quickstart.sh                   # full quickstart, ~30 min (baseline on CPU)
+./scripts/quickstart.sh --skip-baseline   # environment and tests only, ~2 min
+```
+
+It creates `.venv`, installs `requirements.txt`, runs the tests and the TF-IDF baseline, then
+prints the test accuracy and macro-F1. It detects the platform and uses the right interpreter path
+for the OS. If you run it inside a cloned repo it warns before overwriting `results/baseline/`,
+which holds the reference run used by `notebooks/02_evaluation.ipynb`; set
+`BASELINE_OUT=results/repro` to write somewhere else and keep the reference intact.
+
+Or step by step:
 
 ```bash
 python -m venv .venv
@@ -172,6 +187,9 @@ pip install -r requirements.txt
 pytest -q
 python -m src.baseline            # CPU, ~30 min
 ```
+
+Expected baseline result: accuracy 0.8775, macro-F1 0.8267 (C=30). A rerun on a different
+machine typically lands within 0.1 pt.
 
 Transformer training needs a GPU:
 - **Google Colab / Kaggle (T4):** `notebooks/00_colab_runner.ipynb`, about 13 min per epoch.
