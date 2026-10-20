@@ -1,21 +1,21 @@
 true,predicted,count
-Applicable Laws,Governing Laws,34
-Definitions,Defined Terms,26
-Tax Withholdings,Withholdings,23
-Authorizations,Authority,18
-No Waivers,Waivers,16
+Applicable Laws,Governing Laws,33
+Definitions,Defined Terms,24
+Tax Withholdings,Withholdings,24
+Authorizations,Authority,16
+Successors,Binding Effects,16
 Modifications,Amendments,15
+No Waivers,Waivers,14
 Integration,Entire Agreements,13
-Successors,Binding Effects,12
-Defined Terms,Definitions,11
-Warranties,Representations,11
-Withholdings,Tax Withholdings,11
-General,Payments,11
-Waivers,No Waivers,10
-Indemnity,Indemnifications,10
+General,Payments,12
+Withholdings,Tax Withholdings,12
+Defined Terms,Definitions,12
+Waivers,No Waivers,11
+Warranties,Survival,11
 Authority,Authorizations,10
-Warranties,Survival,10
-Consents,Approvals,9
+Indemnity,Indemnifications,10
 Taxes,Withholdings,9
 Successors,Assignments,9
-Benefits,Assignments,8
+Consents,Approvals,9
+Indemnifications,Indemnity,8
+Binding Effects,Successors,8
