@@ -159,13 +159,15 @@ def main(a):
     texts = list(ds["test"]["text"])
     labels = np.array(ds["test"]["label"])
     gl = names.index("Governing Laws")
-    rng = np.random.default_rng(a.seed)
 
-    # which clauses each test applies to (only clauses the change actually modifies)
+    # which clauses each test applies to (only clauses the change actually modifies).
+    # A fresh generator per test: tests that modify the same clauses (the five party names, the
+    # three jurisdictions) get the SAME sample, so they can be compared with each other.
     plan = {}
     for test, (family, f) in TESTS.items():
         idx = [i for i, t in enumerate(texts) if f(t) != t]
         if len(idx) > a.max_per_test:
+            rng = np.random.default_rng(a.seed)
             idx = sorted(rng.choice(idx, a.max_per_test, replace=False).tolist())
         plan[test] = idx
         print(f"{test:32s} {len(idx):5d} clauses")
@@ -205,11 +207,21 @@ def main(a):
 
     names_rows = df[(df.family == "party name")]
     name_gap = (names_rows.groupby("model").flip_rate.agg(lambda s: float(s.max() - s.min()))).to_dict()
+    # do the five names differ more than chance? (chi-square on flips vs no flips, one row per name)
+    from scipy.stats import chi2_contingency
+    name_test = {}
+    for model, g in names_rows.groupby("model"):
+        table = np.array([g.flips.values, (g.n - g.flips).values])
+        degenerate = table[0].sum() == 0 or table[1].sum() == 0   # no flips at all, or every clause flipped
+        name_test[model] = None if degenerate else float(chi2_contingency(table)[1])
+    print("Party names differ more than chance? chi-square p:", {k: None if v is None else round(v, 3)
+                                                                 for k, v in name_test.items()})
     with open(f"{OUT_DIR}/counterfactual.json", "w") as fh:
         json.dump({"config": {"model_dir": a.model_dir, "temperature": a.temperature, "max_length": a.max_length,
                               "max_per_test": a.max_per_test, "seed": a.seed,
                               "baseline": a.baseline if pred.tfidf else None},
                    "party_name_flip_rate_gap": name_gap,
+                   "party_name_chi2_p": name_test,
                    "results": df.to_dict(orient="records")}, fh, indent=2)
 
     view = df.pivot_table(index="test", columns="model", values="flip_rate", sort=False)
