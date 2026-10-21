@@ -1,0 +1,28 @@
+{
+  "non-clause English text": {
+    "n": 41,
+    "mean_confidence": 0.49652811884880066,
+    "median_confidence": 0.44638723134994507,
+    "pct_conf_gt_0.9": 0.14634146341463414,
+    "predicted_labels": {
+      "General": 6,
+      "Adjustments": 4,
+      "Miscellaneous": 3,
+      "Fees": 2,
+      "Authority": 2
+    }
+  },
+  "French text": {
+    "n": 9,
+    "mean_confidence": 0.4519210457801819,
+    "median_confidence": 0.4321480095386505,
+    "pct_conf_gt_0.9": 0.1111111111111111,
+    "predicted_labels": {
+      "Binding Effects": 2,
+      "Enforcements": 1,
+      "Disclosures": 1,
+      "Effectiveness": 1,
+      "Notices": 1
+    }
+  }
+}

@@ -1,0 +1,680 @@
+{
+  "config": {
+    "model_dir": "runs/legalbert_e10_s1",
+    "temperature": 1.44,
+    "max_length": 256,
+    "max_per_test": 400,
+    "seed": 0,
+    "baseline": "models/baseline.joblib"
+  },
+  "party_name_flip_rate_gap": {
+    "Ensemble": 0.025,
+    "Legal-BERT (calibrated)": 0.025,
+    "TF-IDF + LogReg": 0.0175
+  },
+  "results": [
+    {
+      "test": "gender_he_to_she",
+      "family": "gender",
+      "model": "Legal-BERT (calibrated)",
+      "n": 400,
+      "flips": 4,
+      "flip_rate": 0.01,
+      "flip_rate_ci95": [
+        0.0039,
+        0.0254
+      ],
+      "acc_before": 0.835,
+      "acc_after": 0.835,
+      "correct_to_wrong": 2,
+      "conf_before": 0.8908886909484863,
+      "conf_after": 0.8898555040359497
+    },
+    {
+      "test": "gender_he_to_she",
+      "family": "gender",
+      "model": "TF-IDF + LogReg",
+      "n": 400,
+      "flips": 5,
+      "flip_rate": 0.0125,
+      "flip_rate_ci95": [
+        0.0054,
+        0.0289
+      ],
+      "acc_before": 0.8175,
+      "acc_after": 0.815,
+      "correct_to_wrong": 2,
+      "conf_before": 0.831454185334438,
+      "conf_after": 0.8226369087804892
+    },
+    {
+      "test": "gender_he_to_she",
+      "family": "gender",
+      "model": "Ensemble",
+      "n": 400,
+      "flips": 2,
+      "flip_rate": 0.005,
+      "flip_rate_ci95": [
+        0.0014,
+        0.018
+      ],
+      "acc_before": 0.85,
+      "acc_after": 0.8525,
+      "correct_to_wrong": 0,
+      "conf_before": 0.8351083312115825,
+      "conf_after": 0.831354303649218
+    },
+    {
+      "test": "party_john_smith",
+      "family": "party name",
+      "model": "Legal-BERT (calibrated)",
+      "n": 400,
+      "flips": 19,
+      "flip_rate": 0.0475,
+      "flip_rate_ci95": [
+        0.0306,
+        0.073
+      ],
+      "acc_before": 0.86,
+      "acc_after": 0.8625,
+      "correct_to_wrong": 5,
+      "conf_before": 0.8996791243553162,
+      "conf_after": 0.8971803784370422
+    },
+    {
+      "test": "party_john_smith",
+      "family": "party name",
+      "model": "TF-IDF + LogReg",
+      "n": 400,
+      "flips": 7,
+      "flip_rate": 0.0175,
+      "flip_rate_ci95": [
+        0.0085,
+        0.0357
+      ],
+      "acc_before": 0.855,
+      "acc_after": 0.8575,
+      "correct_to_wrong": 2,
+      "conf_before": 0.8599127430574875,
+      "conf_after": 0.827917099892258
+    },
+    {
+      "test": "party_john_smith",
+      "family": "party name",
+      "model": "Ensemble",
+      "n": 400,
+      "flips": 12,
+      "flip_rate": 0.03,
+      "flip_rate_ci95": [
+        0.0172,
+        0.0517
+      ],
+      "acc_before": 0.88,
+      "acc_after": 0.8825,
+      "correct_to_wrong": 3,
+      "conf_before": 0.8556977487584828,
+      "conf_after": 0.8378171039047467
+    },
+    {
+      "test": "party_marie_dubois",
+      "family": "party name",
+      "model": "Legal-BERT (calibrated)",
+      "n": 400,
+      "flips": 15,
+      "flip_rate": 0.0375,
+      "flip_rate_ci95": [
+        0.0229,
+        0.0609
+      ],
+      "acc_before": 0.855,
+      "acc_after": 0.845,
+      "correct_to_wrong": 7,
+      "conf_before": 0.9056233167648315,
+      "conf_after": 0.9022480845451355
+    },
+    {
+      "test": "party_marie_dubois",
+      "family": "party name",
+      "model": "TF-IDF + LogReg",
+      "n": 400,
+      "flips": 11,
+      "flip_rate": 0.0275,
+      "flip_rate_ci95": [
+        0.0154,
+        0.0486
+      ],
+      "acc_before": 0.845,
+      "acc_after": 0.85,
+      "correct_to_wrong": 3,
+      "conf_before": 0.8607887046512688,
+      "conf_after": 0.8518583563683034
+    },
+    {
+      "test": "party_marie_dubois",
+      "family": "party name",
+      "model": "Ensemble",
+      "n": 400,
+      "flips": 10,
+      "flip_rate": 0.025,
+      "flip_rate_ci95": [
+        0.0136,
+        0.0454
+      ],
+      "acc_before": 0.865,
+      "acc_after": 0.865,
+      "correct_to_wrong": 4,
+      "conf_before": 0.8630388129653519,
+      "conf_after": 0.8540461081862132
+    },
+    {
+      "test": "party_fatou_diallo",
+      "family": "party name",
+      "model": "Legal-BERT (calibrated)",
+      "n": 400,
+      "flips": 23,
+      "flip_rate": 0.0575,
+      "flip_rate_ci95": [
+        0.0386,
+        0.0848
+      ],
+      "acc_before": 0.86,
+      "acc_after": 0.8475,
+      "correct_to_wrong": 10,
+      "conf_before": 0.9061534404754639,
+      "conf_after": 0.9023638963699341
+    },
+    {
+      "test": "party_fatou_diallo",
+      "family": "party name",
+      "model": "TF-IDF + LogReg",
+      "n": 400,
+      "flips": 9,
+      "flip_rate": 0.0225,
+      "flip_rate_ci95": [
+        0.0119,
+        0.0422
+      ],
+      "acc_before": 0.8575,
+      "acc_after": 0.8575,
+      "correct_to_wrong": 2,
+      "conf_before": 0.8594779255211875,
+      "conf_after": 0.849339067816706
+    },
+    {
+      "test": "party_fatou_diallo",
+      "family": "party name",
+      "model": "Ensemble",
+      "n": 400,
+      "flips": 17,
+      "flip_rate": 0.0425,
+      "flip_rate_ci95": [
+        0.0267,
+        0.067
+      ],
+      "acc_before": 0.8775,
+      "acc_after": 0.87,
+      "correct_to_wrong": 6,
+      "conf_before": 0.858635296249699,
+      "conf_after": 0.8489749457565446
+    },
+    {
+      "test": "party_mehmet_yilmaz",
+      "family": "party name",
+      "model": "Legal-BERT (calibrated)",
+      "n": 400,
+      "flips": 13,
+      "flip_rate": 0.0325,
+      "flip_rate_ci95": [
+        0.0191,
+        0.0548
+      ],
+      "acc_before": 0.8725,
+      "acc_after": 0.87,
+      "correct_to_wrong": 4,
+      "conf_before": 0.9143507480621338,
+      "conf_after": 0.9087390303611755
+    },
+    {
+      "test": "party_mehmet_yilmaz",
+      "family": "party name",
+      "model": "TF-IDF + LogReg",
+      "n": 400,
+      "flips": 14,
+      "flip_rate": 0.035,
+      "flip_rate_ci95": [
+        0.021,
+        0.0579
+      ],
+      "acc_before": 0.86,
+      "acc_after": 0.8525,
+      "correct_to_wrong": 6,
+      "conf_before": 0.8570395355679381,
+      "conf_after": 0.8528500641234487
+    },
+    {
+      "test": "party_mehmet_yilmaz",
+      "family": "party name",
+      "model": "Ensemble",
+      "n": 400,
+      "flips": 13,
+      "flip_rate": 0.0325,
+      "flip_rate_ci95": [
+        0.0191,
+        0.0548
+      ],
+      "acc_before": 0.8825,
+      "acc_after": 0.885,
+      "correct_to_wrong": 3,
+      "conf_before": 0.8660044896080439,
+      "conf_after": 0.8591020720451845
+    },
+    {
+      "test": "party_wei_zhang",
+      "family": "party name",
+      "model": "Legal-BERT (calibrated)",
+      "n": 400,
+      "flips": 17,
+      "flip_rate": 0.0425,
+      "flip_rate_ci95": [
+        0.0267,
+        0.067
+      ],
+      "acc_before": 0.8375,
+      "acc_after": 0.84,
+      "correct_to_wrong": 5,
+      "conf_before": 0.9024483561515808,
+      "conf_after": 0.8974260091781616
+    },
+    {
+      "test": "party_wei_zhang",
+      "family": "party name",
+      "model": "TF-IDF + LogReg",
+      "n": 400,
+      "flips": 14,
+      "flip_rate": 0.035,
+      "flip_rate_ci95": [
+        0.021,
+        0.0579
+      ],
+      "acc_before": 0.84,
+      "acc_after": 0.835,
+      "correct_to_wrong": 4,
+      "conf_before": 0.8532188023597501,
+      "conf_after": 0.8423496156314036
+    },
+    {
+      "test": "party_wei_zhang",
+      "family": "party name",
+      "model": "Ensemble",
+      "n": 400,
+      "flips": 20,
+      "flip_rate": 0.05,
+      "flip_rate_ci95": [
+        0.0326,
+        0.076
+      ],
+      "acc_before": 0.845,
+      "acc_after": 0.8475,
+      "correct_to_wrong": 6,
+      "conf_before": 0.8522481372674929,
+      "conf_after": 0.8417916161763236
+    },
+    {
+      "test": "jurisdiction_us_to_germany",
+      "family": "jurisdiction",
+      "model": "Legal-BERT (calibrated)",
+      "n": 400,
+      "flips": 5,
+      "flip_rate": 0.0125,
+      "flip_rate_ci95": [
+        0.0054,
+        0.0289
+      ],
+      "acc_before": 0.9125,
+      "acc_after": 0.9075,
+      "correct_to_wrong": 3,
+      "conf_before": 0.8777520656585693,
+      "conf_after": 0.8717136383056641
+    },
+    {
+      "test": "jurisdiction_us_to_germany [Governing Laws only]",
+      "family": "jurisdiction",
+      "model": "Legal-BERT (calibrated)",
+      "n": 212,
+      "flips": 2,
+      "flip_rate": 0.009433962264150943,
+      "flip_rate_ci95": [
+        0.0026,
+        0.0337
+      ],
+      "acc_before": 0.9858490566037735,
+      "acc_after": 0.9811320754716981,
+      "correct_to_wrong": 1,
+      "conf_before": 0.8893388509750366,
+      "conf_after": 0.8855363130569458
+    },
+    {
+      "test": "jurisdiction_us_to_germany",
+      "family": "jurisdiction",
+      "model": "TF-IDF + LogReg",
+      "n": 400,
+      "flips": 9,
+      "flip_rate": 0.0225,
+      "flip_rate_ci95": [
+        0.0119,
+        0.0422
+      ],
+      "acc_before": 0.8925,
+      "acc_after": 0.905,
+      "correct_to_wrong": 2,
+      "conf_before": 0.9034720767501062,
+      "conf_after": 0.8886559274037062
+    },
+    {
+      "test": "jurisdiction_us_to_germany [Governing Laws only]",
+      "family": "jurisdiction",
+      "model": "TF-IDF + LogReg",
+      "n": 212,
+      "flips": 4,
+      "flip_rate": 0.018867924528301886,
+      "flip_rate_ci95": [
+        0.0074,
+        0.0475
+      ],
+      "acc_before": 0.9669811320754716,
+      "acc_after": 0.9858490566037735,
+      "correct_to_wrong": 0,
+      "conf_before": 0.9344378775925097,
+      "conf_after": 0.914884572928097
+    },
+    {
+      "test": "jurisdiction_us_to_germany",
+      "family": "jurisdiction",
+      "model": "Ensemble",
+      "n": 400,
+      "flips": 7,
+      "flip_rate": 0.0175,
+      "flip_rate_ci95": [
+        0.0085,
+        0.0357
+      ],
+      "acc_before": 0.915,
+      "acc_after": 0.915,
+      "correct_to_wrong": 1,
+      "conf_before": 0.8745422205202493,
+      "conf_after": 0.8647004277373533
+    },
+    {
+      "test": "jurisdiction_us_to_germany [Governing Laws only]",
+      "family": "jurisdiction",
+      "model": "Ensemble",
+      "n": 212,
+      "flips": 0,
+      "flip_rate": 0.0,
+      "flip_rate_ci95": [
+        0.0,
+        0.0178
+      ],
+      "acc_before": 0.9905660377358491,
+      "acc_after": 0.9905660377358491,
+      "correct_to_wrong": 0,
+      "conf_before": 0.9028796203133765,
+      "conf_after": 0.8935339467033719
+    },
+    {
+      "test": "jurisdiction_us_to_france",
+      "family": "jurisdiction",
+      "model": "Legal-BERT (calibrated)",
+      "n": 400,
+      "flips": 6,
+      "flip_rate": 0.015,
+      "flip_rate_ci95": [
+        0.0069,
+        0.0323
+      ],
+      "acc_before": 0.9075,
+      "acc_after": 0.9025,
+      "correct_to_wrong": 3,
+      "conf_before": 0.8784365653991699,
+      "conf_after": 0.8514341711997986
+    },
+    {
+      "test": "jurisdiction_us_to_france [Governing Laws only]",
+      "family": "jurisdiction",
+      "model": "Legal-BERT (calibrated)",
+      "n": 206,
+      "flips": 5,
+      "flip_rate": 0.024271844660194174,
+      "flip_rate_ci95": [
+        0.0104,
+        0.0556
+      ],
+      "acc_before": 0.9854368932038835,
+      "acc_after": 0.970873786407767,
+      "correct_to_wrong": 3,
+      "conf_before": 0.8876563310623169,
+      "conf_after": 0.8420217037200928
+    },
+    {
+      "test": "jurisdiction_us_to_france",
+      "family": "jurisdiction",
+      "model": "TF-IDF + LogReg",
+      "n": 400,
+      "flips": 9,
+      "flip_rate": 0.0225,
+      "flip_rate_ci95": [
+        0.0119,
+        0.0422
+      ],
+      "acc_before": 0.8875,
+      "acc_after": 0.8925,
+      "correct_to_wrong": 3,
+      "conf_before": 0.8977183920367883,
+      "conf_after": 0.8839495200986568
+    },
+    {
+      "test": "jurisdiction_us_to_france [Governing Laws only]",
+      "family": "jurisdiction",
+      "model": "TF-IDF + LogReg",
+      "n": 206,
+      "flips": 6,
+      "flip_rate": 0.02912621359223301,
+      "flip_rate_ci95": [
+        0.0134,
+        0.0621
+      ],
+      "acc_before": 0.9611650485436893,
+      "acc_after": 0.9611650485436893,
+      "correct_to_wrong": 3,
+      "conf_before": 0.9259610262340765,
+      "conf_after": 0.9054464662615703
+    },
+    {
+      "test": "jurisdiction_us_to_france",
+      "family": "jurisdiction",
+      "model": "Ensemble",
+      "n": 400,
+      "flips": 10,
+      "flip_rate": 0.025,
+      "flip_rate_ci95": [
+        0.0136,
+        0.0454
+      ],
+      "acc_before": 0.9125,
+      "acc_after": 0.915,
+      "correct_to_wrong": 2,
+      "conf_before": 0.8709333869651056,
+      "conf_after": 0.8532982935261102
+    },
+    {
+      "test": "jurisdiction_us_to_france [Governing Laws only]",
+      "family": "jurisdiction",
+      "model": "Ensemble",
+      "n": 206,
+      "flips": 2,
+      "flip_rate": 0.009708737864077669,
+      "flip_rate_ci95": [
+        0.0027,
+        0.0347
+      ],
+      "acc_before": 0.9902912621359223,
+      "acc_after": 0.9805825242718447,
+      "correct_to_wrong": 2,
+      "conf_before": 0.8974287564621171,
+      "conf_after": 0.8690085006439121
+    },
+    {
+      "test": "jurisdiction_us_to_england",
+      "family": "jurisdiction",
+      "model": "Legal-BERT (calibrated)",
+      "n": 400,
+      "flips": 9,
+      "flip_rate": 0.0225,
+      "flip_rate_ci95": [
+        0.0119,
+        0.0422
+      ],
+      "acc_before": 0.92,
+      "acc_after": 0.91,
+      "correct_to_wrong": 6,
+      "conf_before": 0.8799553513526917,
+      "conf_after": 0.8753109574317932
+    },
+    {
+      "test": "jurisdiction_us_to_england [Governing Laws only]",
+      "family": "jurisdiction",
+      "model": "Legal-BERT (calibrated)",
+      "n": 209,
+      "flips": 1,
+      "flip_rate": 0.004784688995215311,
+      "flip_rate_ci95": [
+        0.0008,
+        0.0266
+      ],
+      "acc_before": 0.9856459330143541,
+      "acc_after": 0.9904306220095693,
+      "correct_to_wrong": 0,
+      "conf_before": 0.8886412382125854,
+      "conf_after": 0.8870816230773926
+    },
+    {
+      "test": "jurisdiction_us_to_england",
+      "family": "jurisdiction",
+      "model": "TF-IDF + LogReg",
+      "n": 400,
+      "flips": 10,
+      "flip_rate": 0.025,
+      "flip_rate_ci95": [
+        0.0136,
+        0.0454
+      ],
+      "acc_before": 0.9,
+      "acc_after": 0.915,
+      "correct_to_wrong": 2,
+      "conf_before": 0.8992544937975023,
+      "conf_after": 0.9044664100141617
+    },
+    {
+      "test": "jurisdiction_us_to_england [Governing Laws only]",
+      "family": "jurisdiction",
+      "model": "TF-IDF + LogReg",
+      "n": 209,
+      "flips": 6,
+      "flip_rate": 0.028708133971291867,
+      "flip_rate_ci95": [
+        0.0132,
+        0.0612
+      ],
+      "acc_before": 0.9665071770334929,
+      "acc_after": 0.9952153110047847,
+      "correct_to_wrong": 0,
+      "conf_before": 0.9307371121137074,
+      "conf_after": 0.9473772462809343
+    },
+    {
+      "test": "jurisdiction_us_to_england",
+      "family": "jurisdiction",
+      "model": "Ensemble",
+      "n": 400,
+      "flips": 6,
+      "flip_rate": 0.015,
+      "flip_rate_ci95": [
+        0.0069,
+        0.0323
+      ],
+      "acc_before": 0.925,
+      "acc_after": 0.9225,
+      "correct_to_wrong": 2,
+      "conf_before": 0.8735035340154356,
+      "conf_after": 0.8756945840612715
+    },
+    {
+      "test": "jurisdiction_us_to_england [Governing Laws only]",
+      "family": "jurisdiction",
+      "model": "Ensemble",
+      "n": 209,
+      "flips": 0,
+      "flip_rate": 0.0,
+      "flip_rate_ci95": [
+        0.0,
+        0.018
+      ],
+      "acc_before": 0.9904306220095693,
+      "acc_after": 0.9904306220095693,
+      "correct_to_wrong": 0,
+      "conf_before": 0.9032049328723689,
+      "conf_after": 0.9135039620104652
+    },
+    {
+      "test": "currency_usd_to_eur",
+      "family": "currency",
+      "model": "Legal-BERT (calibrated)",
+      "n": 376,
+      "flips": 3,
+      "flip_rate": 0.007978723404255319,
+      "flip_rate_ci95": [
+        0.0027,
+        0.0232
+      ],
+      "acc_before": 0.9388297872340425,
+      "acc_after": 0.9335106382978723,
+      "correct_to_wrong": 2,
+      "conf_before": 0.9528101086616516,
+      "conf_after": 0.9522573351860046
+    },
+    {
+      "test": "currency_usd_to_eur",
+      "family": "currency",
+      "model": "TF-IDF + LogReg",
+      "n": 376,
+      "flips": 0,
+      "flip_rate": 0.0,
+      "flip_rate_ci95": [
+        0.0,
+        0.0101
+      ],
+      "acc_before": 0.9228723404255319,
+      "acc_after": 0.9228723404255319,
+      "correct_to_wrong": 0,
+      "conf_before": 0.9127607969800836,
+      "conf_after": 0.910295857181497
+    },
+    {
+      "test": "currency_usd_to_eur",
+      "family": "currency",
+      "model": "Ensemble",
+      "n": 376,
+      "flips": 2,
+      "flip_rate": 0.005319148936170213,
+      "flip_rate_ci95": [
+        0.0015,
+        0.0192
+      ],
+      "acc_before": 0.9335106382978723,
+      "acc_after": 0.9308510638297872,
+      "correct_to_wrong": 1,
+      "conf_before": 0.923528864219661,
+      "conf_after": 0.9228984067390671
+    }
+  ]
+}

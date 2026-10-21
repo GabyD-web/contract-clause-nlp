@@ -1,0 +1,28 @@
+{
+  "non-clause English text": {
+    "n": 41,
+    "mean_confidence": 0.45241546630859375,
+    "median_confidence": 0.3598584234714508,
+    "pct_conf_gt_0.9": 0.12195121951219512,
+    "predicted_labels": {
+      "General": 10,
+      "Payments": 3,
+      "Effective Dates": 3,
+      "Miscellaneous": 3,
+      "Terminations": 2
+    }
+  },
+  "French text": {
+    "n": 9,
+    "mean_confidence": 0.5310660600662231,
+    "median_confidence": 0.660322368144989,
+    "pct_conf_gt_0.9": 0.1111111111111111,
+    "predicted_labels": {
+      "Enforceability": 2,
+      "Payments": 2,
+      "Jurisdictions": 1,
+      "Confidentiality": 1,
+      "Counterparts": 1
+    }
+  }
+}
