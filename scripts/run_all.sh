@@ -11,6 +11,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 PY=${PYTHON:-python}
 export CLAUSE_NLP_ROOT=${CLAUSE_NLP_ROOT:-runs}
+mkdir -p models "$CLAUSE_NLP_ROOT" results logs   # models/ is gitignored since 872c202
 export HF_HUB_DISABLE_PROGRESS_BARS=1
 SEEDS=${SEEDS:-"42 1 2"}
 CONFIG=${CONFIG:-configs/legalbert_e10.yaml}
