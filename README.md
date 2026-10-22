@@ -97,7 +97,7 @@ validation logits are saved. Temperatures and thresholds are fitted on **validat
 - **How the ensemble was chosen.** The idea came after the single-model test results. It has no
   fitted parameters, and its gain is confirmed on validation (macro-F1 0.8325 / 0.8365 vs
   0.8248 / 0.8230 for Legal-BERT alone), which is the check that would have selected it beforehand.
-  The bias audit below was run on Legal-BERT alone, not on the ensemble.
+  The slice audit below (rare types, length, out-of-scope text) was run on Legal-BERT alone; the counterfactual and contract-family audits cover TF-IDF, Legal-BERT and the ensemble.
 
 Files: `results/abstention.json`, `results/abstention_table.csv`, `results/ensemble.json`,
 `results/ensemble_summary.csv`, `results/figures/abstention_curve.png`.
@@ -147,6 +147,50 @@ Mean over the three local-GPU models (`results/audit/seed_{42,1,2}/`).
   93.2%. Because the model is overconfident, even high raw thresholds do not reach 97% accuracy.
     After temperature scaling, and combined with TF-IDF, the system reaches about 97% accuracy on
   77% of clauses: see *Calibration, abstention and ensemble* above.
+
+### Parties and kinds of contract
+
+**Counterfactual swaps** (`src/counterfactual.py`, Legal-BERT seed 42 on the local GPU, temperature 1.44;
+`results/audit/counterfactual.csv`). One detail of each clause is changed; a fair model keeps the clause
+type. Every name and every jurisdiction is tested on the same clauses.
+
+| Change | n | Type changes: Legal-BERT | TF-IDF | Ensemble |
+|---|---|---|---|---|
+| Gender: he → she | 400 | 0.2% | 1.2% | 1.2% |
+| Party: “the Executive” / “the Employee” → 5 names | 5 × 400 | 3.2–3.8% | 1.8–2.0% | 2.2–3.8% |
+| Governing law: US → Germany / France / England | 400 | 0.8–3.8% | 2.2% | 1.0–1.2% |
+| … Governing Laws clauses only | 203 | 0.0–1.5% | 1.5–2.0% | 0.0–1.0% |
+| Currency: $ → € | 376 | 1.1% | 0.0% | 0.8% |
+
+- **No effect of the name’s origin.** On the same 400 clauses, John Smith, Marie Dubois, Fatou Diallo,
+  Mehmet Yilmaz and Wei Zhang give the same flip rate (chi-square p = 0.995 for Legal-BERT, 0.999 for
+  TF-IDF, 0.718 for the ensemble). The 3–4% that change come from replacing a role word with any
+  person’s name: wording sensitivity, not origin. A first run sampled different clauses per name and
+  showed 3.2–5.8% (p = 0.47); that spread was sampling noise.
+- **Gender and currency are neutral** (≤ 1.2%). **Governing Laws clauses keep their type** in at least
+  98.5% of US → EU swaps; other clauses that name a US state (e.g. “a Delaware corporation”) change up
+  to 3.8%.
+
+**Kinds of contract** (`src/slices.py`; families inferred from keywords, a clause can be in several;
+Legal-BERT = mean of the Colab/Kaggle seeds; `results/audit/slices.csv`).
+
+| Kind of contract | n | Types | TF-IDF acc. | Legal-BERT acc. | Legal-BERT macro-F1 | Legal-BERT confidence | Ensemble acc. (s1 / s2) |
+|---|---|---|---|---|---|---|---|
+| All test clauses | 10,000 | 100 | 0.878 | 0.885 | 0.829 | 0.911 | 0.895 / 0.891 |
+| Credit / loan | 2,132 | 89 | 0.906 | 0.909 | 0.848 | 0.926 | 0.921 / 0.917 |
+| M&A | 763 | 80 | 0.907 | 0.918 | 0.833 | 0.926 | 0.925 / 0.931 |
+| Licence / IP | 186 | 42 | 0.903 | 0.900 | 0.771 | 0.918 | 0.903 / 0.909 |
+| Securities | 774 | 81 | 0.880 | 0.882 | 0.797 | 0.914 | 0.891 / 0.891 |
+| Employment | 1,749 | 86 | 0.854 | 0.863 | 0.716 | 0.904 | 0.873 / 0.874 |
+| **Lease / real estate** | 227 | 64 | **0.749** | **0.746** | **0.654** | 0.861 | 0.762 / 0.767 |
+| ALL-CAPS boilerplate | 236 | 20 | 0.894 | 0.897 | 0.541 | 0.884 | 0.907 / 0.898 |
+
+- **Leases and real estate are the weak spot:** 74.6% accuracy at 86% confidence. TF-IDF is equally weak,
+  so the training data lacks lease contracts; it is not a model problem.
+- **ALL-CAPS boilerplate** keeps its accuracy but not its macro-F1 (0.541 over 20 types): frequent
+  uppercase types are right, rare ones wrong.
+- The ensemble is better than Legal-BERT alone in every family. Families come from keywords, so they
+  overlap and differ in their mix of clause types; macro-F1 is computed over the types present.
 
 The model card ([`docs/model_card.md`](docs/model_card.md)) lists intended uses, uses the model
 must not be put to, and data-protection requirements.
@@ -202,6 +246,12 @@ Official splits, fixed seeds (42 / 1 / 2), configs in `configs/`, hyperparameter
 validation only, pinned versions in `requirements.lock.txt`. Results are stable to within about
 ±0.5 pt across seeds and hardware; exact bit-for-bit reproduction across different GPUs is not
 possible, so all headline numbers are means over six runs.
+
+**Full reproduction run (21 Oct).** The whole pipeline (`scripts/run_all.sh`) was rerun on an RTX 4070 Ti
+SUPER: the three Legal-BERT seeds land within 0.05–0.12 pt of the committed reference (accuracy
+0.8854 ± 0.0005, macro-F1 0.8258 ± 0.0015 vs 0.8842 / 0.8254) and the baseline within 0.1 pt
+(0.8767 / 0.8266 vs 0.8775 / 0.8267). Outputs are in `results/rerun_2026-10-21/`; the committed
+reference files were left unchanged.
 
 ## References
 

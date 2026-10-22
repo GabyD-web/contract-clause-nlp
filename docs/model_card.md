@@ -148,6 +148,15 @@ calibrated model or the ensemble.
 - **Rare classes are overconfident.** The bottom-40 slice has 0.947 mean confidence at 0.780 accuracy —
   a 17-point confidence/accuracy gap, the worst calibration in any slice. This is the risk that
   matters in production: rare clauses are exactly where a lawyer needs the tool to say "I don't know".
+- **Counterfactual audit (21–22 Oct, `src/counterfactual.py`).** Gender 0.2%, currency 1.1%, party names
+  3.2–3.8% with no difference between names (chi-square p = 0.995, same 400 clauses), Governing Laws
+  clauses 0–1.5% under US → EU swaps. A first run that sampled different clauses per name (3.2–5.8%, p = 0.47)
+  was superseded.
+- **Contract families (22 Oct, `src/slices.py`).** Lease / real estate is the weak spot (Legal-BERT 0.746,
+  TF-IDF 0.749, n = 227); credit, M&A and licences around 0.90.
+- **Reproduction run (21 Oct, RTX 4070 Ti SUPER).** Within 0.05–0.12 pt of the reference; baseline within
+  0.1 pt. `results/rerun_2026-10-21/`.
+
 
 ### Calibration, abstention and ensemble
 
@@ -199,7 +208,14 @@ Files: `results/abstention.json`, `results/abstention_table.csv`, `results/ensem
 - Retrieval is BM25-based; it relies on lexical overlap and will miss paraphrases that share no words
   with the bank. Its weakness is concentrated in rare clause types (hit@5 = 0.917).
 - Retrieval evaluation rests on 30 queries, which is too few for tight confidence intervals.
-- The bias audit was run on Legal-BERT alone; the calibrated model and the ensemble have not been audited.
+- The slice audit (rare types, length, out-of-scope text) was run on Legal-BERT alone; the counterfactual
+  and contract-family audits cover TF-IDF, Legal-BERT and the ensemble.
+- **Lease and real-estate clauses are a weak spot:** 74.6% accuracy at 86% confidence (n = 227), and
+  TF-IDF is no better. Do not use on property or lease portfolios without adding lease contracts to training.
+- Replacing a role (“the Executive”) with a person’s name changes the predicted type for 3–4% of clauses.
+  Names of different origins give the same rate (chi-square p = 0.995), so no name-origin bias was found.
+  Gender and currency swaps change ≤ 1.2%; US → EU governing-law swaps change ≤ 1.5% of Governing Laws
+  clauses (ensemble ≤ 1.0%).
 
 ## Data protection (GDPR)
 Client contracts can contain personal data. Run the model and the clause bank on the client's
