@@ -35,6 +35,20 @@ set was used once per run.
 Mean ± sample standard deviation across runs. Single runs, the 95% bootstrap CI of each run and
 the full training history are in [`results/EXPERIMENTS.md`](results/EXPERIMENTS.md).
 
+**Cost of each model.**
+
+| Model | Trainable parameters | Training time (one run) | Hardware | Accuracy | Macro-F1 |
+|---|---|---|---|---|---|
+| Always “Governing Laws” (floor) | 0 | none | – | 0.058 | 0.001 |
+| TF-IDF + logistic regression | 17.3 M (173,477 n-grams × 100 types) | 12 min (C=30; 29 min for the 3-value grid) | laptop CPU | 0.878 | 0.827 |
+| Legal-BERT, 10 epochs | ≈110 M | 2 h 00 – 2 h 08 (T4) / 39 – 42 min (RTX 4070 Ti SUPER) | GPU | 0.885 | 0.827 |
+| Ensemble (calibrated Legal-BERT + TF-IDF) | 1 extra (the temperature) | none beyond the two models | – | 0.891 – 0.895 | 0.836 – 0.844 |
+
+Training times come from `results/*/train_log.json` (validation included) and
+`results/baseline/test_metrics.json`. Legal-BERT has about 6× more parameters than the baseline and
+needs about 10× its training time on a GPU, for +0.7 pt accuracy and no macro-F1 gain on its own;
+combined with TF-IDF, which adds almost nothing at inference, it gives the only significant macro-F1 gain.
+
 **What this shows**
 - **Accuracy: Legal-BERT is better, in every run.** All six runs score between 0.8823 and 0.8873,
   against 0.8775 for the baseline (+0.7 pt). On seed 42 the difference is significant
