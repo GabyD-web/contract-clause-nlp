@@ -267,6 +267,11 @@ SUPER: the three Legal-BERT seeds land within 0.05–0.12 pt of the committed re
 (0.8767 / 0.8266 vs 0.8775 / 0.8267). Outputs are in `results/rerun_2026-10-21/`; the committed
 reference files were left unchanged.
 
+
+**Fresh-clone check (22 Oct).** A team member cloned the repository on a separate Windows laptop where the
+project had never been installed and followed only this README (`./scripts/quickstart.sh`): the tests pass and
+the baseline gives test accuracy [0.87x] and macro-F1 [0.82x] (reference 0.8775 / 0.8267).
+
 ## References
 
 - Chalkidis et al. (2022). *LexGLUE: A Benchmark Dataset for Legal Language Understanding in English.* ACL.
